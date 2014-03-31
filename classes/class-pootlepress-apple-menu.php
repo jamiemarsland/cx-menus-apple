@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Pootlepress_Apple_Menu Class
  *
- * Base class for the Pootlepress Apple Menu.
+ * Base class for the Pootlepress Papple Menu.
  *
  * @package WordPress
  * @subpackage Pootlepress_Apple_Menu
@@ -100,7 +100,7 @@ class Pootlepress_Apple_Menu {
 		}
 		
 		$o[] = array(
-				'name' => __( 'Apple Menu', 'pootlepress-apple-menu' ),
+				'name' => __( 'Papple Menu', 'pootlepress-apple-menu' ),
 				'type' => 'subheading'
 				);
         $o[] = array(
@@ -112,15 +112,15 @@ class Pootlepress_Apple_Menu {
         );
         $o[] = array(
             'id' => 'pootlepress-apple-menu-enable',
-            'name' => __( 'Use Apple Menu', 'pootlepress-apple-menu' ),
-            'desc' => __( 'Enable Apple Menu', 'pootlepress-apple-menu' ),
+            'name' => __( 'Use Papple Menu', 'pootlepress-apple-menu' ),
+            'desc' => __( 'Enable Papple Menu', 'pootlepress-apple-menu' ),
             'std' => 'true',
             'type' => 'checkbox'
         );
         $o[] =	array(
             'id' => 'pootlepress-apple-menu-base-color',
             'name' => 'Base Colour',
-            'desc' => 'Pick a base colour for Apple menu',
+            'desc' => 'Pick a base colour for Papple menu',
             'std' => '#000000',
             'type' => 'color'
         );
