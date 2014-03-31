@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Canvas Extension - Apple Menu
+Plugin Name: Canvas Extension - Papple Menu
 Plugin URI: http://pootlepress.com/
-Description: An extension for WooThemes Canvas that contains a menu design of apple.com. This helps you customise the look and feel of your navigation menu in the Canvas theme by WooThemes.
+Description: An extension for WooThemes Canvas that contains a menu design inspired by apple.com. This helps you customise the look and feel of your navigation menu in the Canvas theme by WooThemes.
 Version: 1.0.0
 Author: PootlePress
 Author URI: http://pootlepress.com/
