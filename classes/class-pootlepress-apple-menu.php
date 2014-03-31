@@ -68,6 +68,8 @@ class Pootlepress_Apple_Menu {
 		add_action( 'wp_enqueue_scripts', array( &$this, 'load_style_specific_stylesheet' ) );
         add_action( 'wp_enqueue_scripts', array( &$this, 'load_script' ) );
 
+        add_action('admin_print_scripts', array(&$this, 'load_admin_script'));
+
         add_action('wp_head', array(&$this, 'option_css'));
 	} // End __construct()
 
@@ -76,6 +78,10 @@ class Pootlepress_Apple_Menu {
         wp_enqueue_script('pootlepress-apple', plugin_dir_url($pluginFile) . 'scripts/apple.js', array('jquery'));
     }
 
+    public function load_admin_script() {
+        $pluginFile = dirname(dirname(__FILE__)) . '/pootlepress-apple-menu.php';
+        wp_enqueue_script('pootlepress-apple-admin', plugin_dir_url($pluginFile) . 'scripts/apple-admin.js', array('jquery'));
+    }
 
 	/**
 	 * Add theme options to the WooFramework.
@@ -125,6 +131,28 @@ class Pootlepress_Apple_Menu {
             'std' => 'false',
             'type' => 'checkbox'
         );
+
+        $shortname = 'woo';
+        $o[] = array( "name" => __( 'Enable Search', 'woothemes' ),
+            "desc" => __( 'Enable Search in the right navigation.', 'woothemes' ),
+            "id" => $shortname."_nav_search",
+            "std" => "false",
+            "type" => "checkbox");
+
+        $o[] = array( "name" => __( 'Navigation Margin Top/Bottom', 'woothemes' ),
+            "desc" => __( 'Enter an integer value i.e. 20 for the desired header margin.', 'woothemes' ),
+            "id" => $shortname."_nav_margin_tb",
+            "std" => "",
+            "type" => array(
+                array(  'id' => $shortname. '_nav_margin_top',
+                    'type' => 'text',
+                    'std' => '',
+                    'meta' => __( 'Top', 'woothemes' ) ),
+                array(  'id' => $shortname. '_nav_margin_bottom',
+                    'type' => 'text',
+                    'std' => '',
+                    'meta' => __( 'Bottom', 'woothemes' ) )
+            ));
         return $o;
 	} // End add_theme_options()
 
@@ -160,6 +188,43 @@ class Pootlepress_Apple_Menu {
 
         if ($enable == 'true') {
             $css = '';
+
+            $searchEnabled = get_option('woo_nav_search', 'false');
+            if ($searchEnabled == 'true') {
+                $css .= <<<MAINNAV
+#navigation_apple #main-nav
+{
+    width: 95%;
+}
+MAINNAV;
+            } else {
+                $css .= <<<MAINNAV
+#navigation_apple #main-nav
+{
+    width: 100%;
+}
+MAINNAV;
+            }
+
+            $marginTop = get_option('woo_nav_margin_top', '0');
+            if ($marginTop == '') {
+                $marginTop = '0';
+            }
+            $marginBottom = get_option('woo_nav_margin_bottom', '20');
+            if ($marginBottom == '') {
+                $marginBottom = '20';
+            }
+            $marginTop .= 'px';
+            $marginBottom .= 'px';
+
+            $css .= <<<MAINNAVMARGIN
+#navigation_apple
+{
+    margin-top: $marginTop !important;
+    margin-bottom: $marginBottom !important;
+}
+MAINNAVMARGIN;
+
 
             $baseColor = get_option('pootlepress-apple-menu-base-color', '#000000');
             if (empty($baseColor)) {
@@ -531,15 +596,25 @@ CSSSTYLE2;
             <div id="navigation_apple" class="col-full">
     <!--            --><?php //woo_nav_inside(); ?>
 
-                <div id="header-search" class="">
-                    <form action="<?php esc_attr_e(home_url()) ?>">
-                        <input class="field" type="text" name="s" size="31">
-                        <button type="submit" id="go">
-                            <span>Go</span>
-                            <i class='icon-search'></i>
-                        </button>
-                    </form>
-                </div>
+                <?php
+
+                $navSearchEnabled = get_option('woo_nav_search', 'false');
+                if ($navSearchEnabled == 'true') {
+                    ?>
+                    <div id="header-search" class="">
+                        <form action="<?php esc_attr_e(home_url()) ?>">
+                            <input class="field" type="text" name="s" size="31">
+                            <button type="submit" id="go">
+                                <span>Go</span>
+                                <i class='icon-search'></i>
+                            </button>
+                        </form>
+                    </div>
+                    <?php
+                }
+
+                ?>
+
 
                 <?php
                 if ( function_exists( 'has_nav_menu' ) && has_nav_menu( 'primary-menu' ) ) {
