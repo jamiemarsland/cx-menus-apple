@@ -79,8 +79,12 @@ class Pootlepress_Apple_Menu {
     }
 
     public function load_admin_script() {
-        $pluginFile = dirname(dirname(__FILE__)) . '/pootlepress-apple-menu.php';
-        wp_enqueue_script('pootlepress-apple-admin', plugin_dir_url($pluginFile) . 'scripts/apple-admin.js', array('jquery'));
+        $screen = get_current_screen();
+        if ($screen->base == 'toplevel_page_woothemes') {
+            $pluginFile = dirname(dirname(__FILE__)) . '/pootlepress-apple-menu.php';
+            wp_enqueue_script('pootlepress-apple-admin', plugin_dir_url($pluginFile) . 'scripts/apple-admin.js', array('jquery'));
+        }
+
     }
 
 	/**
