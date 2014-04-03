@@ -2,7 +2,7 @@ Papple Menu - Canvas Extension
 ==============================
 
 
-Watch the demo here: 
+Watch the demo here: http://www.pootlepress.com/shop/papple-menu-woothemes-canvas/
 
 Instructions
 
@@ -10,5 +10,7 @@ Instructions
 2. Wootle Menu will be turned on automatically, but you can see the option under 'Canvas Extensions' (star icon) in the Canvas Theme Options
 
 Versions
+
+v1.0.1 - Fix dropdown issue effecting WP admin area
 
 v1.0.0 - initial release
