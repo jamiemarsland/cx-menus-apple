@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Pootlepress_Apple_Menu Class
  *
- * Base class for the Pootlepress Apple Menu.
+ * Base class for the Pootlepress Papple Menu.
  *
  * @package WordPress
  * @subpackage Pootlepress_Apple_Menu
@@ -104,7 +104,7 @@ class Pootlepress_Apple_Menu {
 		}
 		
 		$o[] = array(
-				'name' => __( 'Apple Menu', 'pootlepress-apple-menu' ),
+				'name' => __( 'Papple Menu', 'pootlepress-apple-menu' ),
 				'type' => 'subheading'
 				);
         $o[] = array(
@@ -116,15 +116,15 @@ class Pootlepress_Apple_Menu {
         );
         $o[] = array(
             'id' => 'pootlepress-apple-menu-enable',
-            'name' => __( 'Use Apple Menu', 'pootlepress-apple-menu' ),
-            'desc' => __( 'Enable Apple Menu', 'pootlepress-apple-menu' ),
+            'name' => __( 'Use Papple Menu', 'pootlepress-apple-menu' ),
+            'desc' => __( 'Enable Papple Menu', 'pootlepress-apple-menu' ),
             'std' => 'true',
             'type' => 'checkbox'
         );
         $o[] =	array(
             'id' => 'pootlepress-apple-menu-base-color',
             'name' => 'Base Colour',
-            'desc' => 'Pick a base colour for Apple menu',
+            'desc' => 'Pick a base colour for Papple menu',
             'std' => '#000000',
             'type' => 'color'
         );
@@ -281,7 +281,6 @@ MAINNAVMARGIN;
         url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAAkCAMAAABfcIIyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHVQTFRFAAAA%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F5YtmQAAAACd0Uk5TAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmZiD6WAAAAdlJREFUeF7t3btuFEEQheFzunotGYkIERA4spn3fyeHiAgEEtsXB82s2eEJavR%2F0Wjyo75XWfHpw4MkSXNqCkA2lr2%2B%2Fvz63n15qpI0x5yTSAM52XaxJLVXf%2FkoaY6xQk2sgXy8Ql2KJf3wS5HG6HMMQg3kZNkuxVGKNLxJo48%2BxhxTpBrIx7JcXEqUKJI3zd77CjWLaiAle4U6Iixv6q33MfocTL%2BBlCy7OEqJqCFvs%2FV2m3%2BTaiAd6zb7rlHtrbc1VA%2Bm30BSa%2B%2B7RNSo4a21thbVTL%2BBnCy7rCV1rdXbtbXW%2B%2Bh%2Ft78BZLM2v6NE1Fov%2FrpC3Zl%2BA2l5H6lrrRe%2FXNu%2BqCbUQE57qGvsoW5t9D4H028gJculOKLUWuvFz%2B16O9NipAZSsm8nWpfq53ZlTQ3k9s%2BamlADZ0CogZMh1MDJEGrgZAg1cDL%2Fh5ojLSC1%2ByMtLp8A2R0un3BNFEjv%2FpooDzqA9O4fdPD0Esju8PSSIglAdsciCZQzArI7lDOat30yCg8CGe2FB1eovZcI7oMSwUBSq0TwWlQHxfyBEzgW86ftDpDase0ODfKA7A4N8mhlC2R318r2px%2BeQqLpPJDae9P5%2FmrVz491%2FWekBlKy7PXVfn9rb9xXsMD2wdOcAAAAAElFTkSuQmCC') no-repeat 50% 50%,
         -webkit-gradient(linear, 0 100%, 0 0, from($navAppleColor1), color-stop(0.5, $navAppleColor2), color-stop(0.51, $navAppleColor3), to($navAppleColor4))
 ;
-    background-size: 100%;
 }
 CSSSTYLE;
 
