@@ -79,8 +79,8 @@ class Pootlepress_Apple_Menu {
     }
 
     public function load_admin_script() {
-        $screen = get_current_screen();
-        if ($screen->base == 'toplevel_page_woothemes') {
+        //$screen = get_current_screen();
+        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'woothemes') {
             $pluginFile = dirname(dirname(__FILE__)) . '/pootlepress-apple-menu.php';
             wp_enqueue_script('pootlepress-apple-admin', plugin_dir_url($pluginFile) . 'scripts/apple-admin.js', array('jquery'));
         }
@@ -148,11 +148,11 @@ class Pootlepress_Apple_Menu {
             "id" => $shortname."_nav_margin_tb",
             "std" => "",
             "type" => array(
-                array(  'id' => $shortname. '_nav_margin_top',
+                array(  'id' => 'pootlepress_nav_margin_top',
                     'type' => 'text',
                     'std' => '',
                     'meta' => __( 'Top', 'woothemes' ) ),
-                array(  'id' => $shortname. '_nav_margin_bottom',
+                array(  'id' => 'pootlepress_nav_margin_bottom',
                     'type' => 'text',
                     'std' => '',
                     'meta' => __( 'Bottom', 'woothemes' ) )
@@ -308,6 +308,12 @@ CSSSTYLE;
 ;
 }
 CSSSTYLE2;
+
+            $css .= "@media only screen and (max-width: 767px) {\n";
+            $css .= "#navigation_apple {\n";
+            $css .= "\t" . 'display: none;' . "\n";
+            $css .= "}\n";
+            $css .= "}\n";
 
             echo "<style>".$css."</style>";
         }

@@ -2,7 +2,7 @@
 
     $(document).ready(function () {
         var $appleMenuSearchSection = null;
-        $('#woo-option-applemenu .section').each(function () {
+        $('#woo-option-papplemenu .section').each(function () {
            if ($(this).find('.heading').text() == 'Enable Search') {
                $appleMenuSearchSection = $(this);
            }
@@ -32,7 +32,7 @@
         });
 
         var $appleMenuMarginSection = null;
-        $('#woo-option-applemenu .section').each(function () {
+        $('#woo-option-papplemenu .section').each(function () {
             if ($(this).find('.heading').text() == 'Navigation Margin Top/Bottom') {
                 $appleMenuMarginSection = $(this);
             }
@@ -45,18 +45,18 @@
             }
         });
 
-        $appleMenuMarginSection.find('input[name=woo_nav_margin_top]').change(function () {
+        $appleMenuMarginSection.find('input[name=pootlepress_nav_margin_top]').change(function () {
             $primaryNavMarginSection.find('input[name=woo_nav_margin_top]').val($(this).val());
         });
-        $appleMenuMarginSection.find('input[name=woo_nav_margin_bottom]').change(function () {
+        $appleMenuMarginSection.find('input[name=pootlepress_nav_margin_bottom]').change(function () {
             $primaryNavMarginSection.find('input[name=woo_nav_margin_bottom]').val($(this).val());
         });
 
         $primaryNavMarginSection.find('input[name=woo_nav_margin_top]').change(function () {
-            $appleMenuMarginSection.find('input[name=woo_nav_margin_top]').val($(this).val());
+            $appleMenuMarginSection.find('input[name=pootlepress_nav_margin_top]').val($(this).val());
         });
         $primaryNavMarginSection.find('input[name=woo_nav_margin_bottom]').change(function () {
-            $appleMenuMarginSection.find('input[name=woo_nav_margin_bottom]').val($(this).val());
+            $appleMenuMarginSection.find('input[name=pootlepress_nav_margin_bottom]').val($(this).val());
         });
     });
 
