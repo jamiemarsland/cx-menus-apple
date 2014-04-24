@@ -11,6 +11,8 @@ Instructions
 
 Versions
 
+v1.0.3 - make Papple menu not visible in mobile view
+
 v1.0.2 - fix for CSS and FireFox issues
 
 v1.0.1 - Fix dropdown issue effecting WP admin area
