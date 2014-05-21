@@ -629,7 +629,15 @@ CSSSTYLE2;
 
                 <?php
                 if ( function_exists( 'has_nav_menu' ) && has_nav_menu( 'primary-menu' ) ) {
-                    wp_nav_menu( array( 'sort_column' => 'menu_order', 'container' => 'ul', 'menu_id' => 'main-nav', 'menu_class' => 'nav fl', 'theme_location' => 'primary-menu' ) );
+                    if (class_exists('Pootlepress_FA_Main_Nav_Walker')) {
+                        wp_nav_menu( array( 'sort_column' => 'menu_order', 'container' => 'ul', 'menu_id' => 'main-nav', 'menu_class' => 'nav fl', 'theme_location' => 'primary-menu',
+                            'link_before' => '<span>', 'link_after' => '</span>',
+                            'walker' => new Pootlepress_FA_Main_Nav_Walker()
+                        ) );
+                    } else {
+                        wp_nav_menu( array( 'sort_column' => 'menu_order', 'container' => 'ul', 'menu_id' => 'main-nav', 'menu_class' => 'nav fl', 'theme_location' => 'primary-menu' ) );
+                    }
+
                 } else {
                     ?>
                     <ul id="main-nav" class="nav fl">
