@@ -42,6 +42,8 @@ class Pootlepress_Apple_Menu {
 	private $file;
 	private $_menu_style;
 
+    private $isFramework5;
+
 	/**
 	 * Constructor.
 	 * @param string $file The base file of the plugin.
@@ -54,6 +56,8 @@ class Pootlepress_Apple_Menu {
 		$this->load_plugin_textdomain();
 		add_action( 'init', 'check_main_heading', 0 );
 		add_action( 'init', array( &$this, 'load_localisation' ), 0 );
+
+        add_action('init', array($this, 'detect_framework'), 1000);
 
 		// Run this on activation.
 		register_activation_hook( $file, array( &$this, 'activation' ) );
@@ -68,10 +72,78 @@ class Pootlepress_Apple_Menu {
 		add_action( 'wp_enqueue_scripts', array( &$this, 'load_style_specific_stylesheet' ) );
         add_action( 'wp_enqueue_scripts', array( &$this, 'load_script' ) );
 
-        add_action('admin_print_scripts', array(&$this, 'load_admin_script'));
-
         add_action('wp_head', array(&$this, 'option_css'));
+
+
 	} // End __construct()
+
+    public function detect_framework() {
+        if (!class_exists('WF_Settings')) {
+            // is old framework
+            add_action('admin_print_scripts', array(&$this, 'load_admin_script'));
+            $this->isFramework5 = true;
+        } else {
+            // framework 6
+            $this->isFramework5 = false;
+
+            $wooNavSearch = get_option('woo_nav_search', 'false');
+            $pootlepressNavSearch = get_option('pootlepress_nav_search');
+
+            if ($pootlepressNavSearch === false) {
+                $pootlepressNavSearch = $wooNavSearch;
+                update_option('pootlepress_nav_search', $pootlepressNavSearch);
+            }
+
+//            global $woo_options;
+//            if (!isset($woo_options['pootlepress_nav_search']) &&
+//                isset($woo_options['woo_nav_search'])
+//            ) {
+//                $woo_options['pootlepress_nav_search'] = $woo_options['woo_nav_search'];
+//
+//                $serialized_value = maybe_serialize( $woo_options );
+//                $option = 'woo_options';
+//                global $wpdb;
+//                $result = $wpdb->update( $wpdb->options, array( 'option_value' => $serialized_value ), array( 'option_name' => $option ) );
+//
+//            }
+//
+            add_action( "update_option_woo_options", array($this, 'update_woo_options'), 10, 2);
+        }
+    }
+
+    public function update_woo_options($oldOptions, $newOptions) {
+        if (isset($oldOptions['woo_nav_search'])) {
+            if (isset($newOptions['woo_nav_search'])) {
+                if ($oldOptions['woo_nav_search'] !== $newOptions['woo_nav_search']) {
+                    $newOptions['pootlepress_nav_search'] = $newOptions['woo_nav_search'];
+
+                    $serialized_value = maybe_serialize( $newOptions );
+                    $option = 'woo_options';
+                    global $wpdb;
+                    $result = $wpdb->update( $wpdb->options, array( 'option_value' => $serialized_value ), array( 'option_name' => $option ) );
+
+                    update_option('pootlepress_nav_search', $newOptions['pootlepress_nav_search']);
+                    return;
+                }
+            }
+        }
+
+        if (isset($oldOptions['pootlepress_nav_search'])) {
+            if (isset($newOptions['pootlepress_nav_search'])) {
+                if ($oldOptions['pootlepress_nav_search'] !== $newOptions['pootlepress_nav_search']) {
+                    $newOptions['woo_nav_search'] = $newOptions['pootlepress_nav_search'];
+
+                    $serialized_value = maybe_serialize( $newOptions );
+                    $option = 'woo_options';
+                    global $wpdb;
+                    $result = $wpdb->update( $wpdb->options, array( 'option_value' => $serialized_value ), array( 'option_name' => $option ) );
+
+                    update_option('woo_nav_search', $newOptions['woo_nav_search']);
+                    return;
+                }
+            }
+        }
+    }
 
     public function load_script() {
         $pluginFile = dirname(dirname(__FILE__)) . '/pootlepress-apple-menu.php';
@@ -137,22 +209,27 @@ class Pootlepress_Apple_Menu {
         );
 
         $shortname = 'woo';
-        $o[] = array( "name" => __( 'Enable Search', 'woothemes' ),
-            "desc" => __( 'Enable Search in the right navigation.', 'woothemes' ),
-            "id" => $shortname."_nav_search",
-            "std" => "false",
-            "type" => "checkbox");
+
+//        if ($this->isFramework5) {
+            $o[] = array("name" => __('Enable Search', 'woothemes'),
+                "desc" => __('Enable Search in the right navigation.', 'woothemes'),
+                "id" => "pootlepress_nav_search",
+                "std" => "false",
+                "type" => "checkbox");
+//        }
+
+        $s = $this->isFramework5 ? 'pootlepress' : 'woo';
 
         $o[] = array( "name" => __( 'Navigation Margin Top/Bottom', 'woothemes' ),
             "desc" => __( 'Enter an integer value i.e. 20 for the desired header margin.', 'woothemes' ),
             "id" => $shortname."_nav_margin_tb",
             "std" => "",
             "type" => array(
-                array(  'id' => 'pootlepress_nav_margin_top',
+                array(  'id' => $s . '_nav_margin_top',
                     'type' => 'text',
                     'std' => '',
                     'meta' => __( 'Top', 'woothemes' ) ),
-                array(  'id' => 'pootlepress_nav_margin_bottom',
+                array(  'id' => $s . '_nav_margin_bottom',
                     'type' => 'text',
                     'std' => '',
                     'meta' => __( 'Bottom', 'woothemes' ) )

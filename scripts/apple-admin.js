@@ -7,6 +7,13 @@
                $appleMenuSearchSection = $(this);
            }
         });
+        if ($appleMenuSearchSection == null) {
+            $('#papple-menu tr').each(function () {
+                if ($(this).find('th').text() == 'Enable Search') {
+                    $appleMenuSearchSection = $(this);
+                }
+            });
+        }
 
         var $primaryNavSearchSection = null;
         $('#woo-option-primarynavigation .section').each(function () {
@@ -14,6 +21,13 @@
                 $primaryNavSearchSection = $(this);
             }
         });
+        if ($primaryNavSearchSection == null) {
+            $('#primary-navigation tr').each(function () {
+                if ($(this).find('th').text() == 'Enable Search') {
+                    $primaryNavSearchSection = $(this);
+                }
+            });
+        }
 
         $appleMenuSearchSection.find('input[type=checkbox]').click(function () {
             if ($(this).is(':checked')) {
@@ -37,6 +51,13 @@
                 $appleMenuMarginSection = $(this);
             }
         });
+        if ($appleMenuMarginSection == null) {
+            $('#papple-menu tr').each(function () {
+                if ($(this).find('th').text() == 'Navigation Margin Top/Bottom') {
+                    $appleMenuMarginSection = $(this);
+                }
+            });
+        }
 
         var $primaryNavMarginSection = null;
         $('#woo-option-primarynavigation .section').each(function () {
@@ -44,6 +65,14 @@
                 $primaryNavMarginSection = $(this);
             }
         });
+        if ($primaryNavMarginSection == null) {
+            $('#primary-navigation tr').each(function () {
+                if ($(this).find('th').text() == 'Navigation Margin Top/Bottom') {
+                    $primaryNavMarginSection = $(this);
+                }
+            });
+        }
+
 
         $appleMenuMarginSection.find('input[name=pootlepress_nav_margin_top]').change(function () {
             $primaryNavMarginSection.find('input[name=woo_nav_margin_top]').val($(this).val());
