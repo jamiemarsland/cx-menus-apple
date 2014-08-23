@@ -11,6 +11,8 @@ Instructions
 
 Versions
 
+v1.1.1 - fix compatibility with Woo Framework 6
+
 v1.1 - ability to update within WordPress
 
 v1.0.2 - fix for CSS and FireFox issues
