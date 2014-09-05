@@ -694,7 +694,7 @@ CSSSTYLE2;
                             <input class="field" type="text" name="s" size="31">
                             <button type="submit" id="go">
                                 <span>Go</span>
-                                <i class='icon-search'></i>
+                                <i class='fa fa-search'></i>
                             </button>
                         </form>
                     </div>
